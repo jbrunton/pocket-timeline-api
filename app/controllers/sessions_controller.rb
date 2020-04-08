@@ -9,8 +9,11 @@ class SessionsController < ApplicationController
 
     # Log the authorizing user in.
     self.current_user = @auth.user
-
-    redirect_to '/home/index'
+    
+    respond_to do |format|
+      format.html { redirect_to '/home/index' }
+      format.json { render json: { success: true } }
+    end
   end
 
   def destroy
