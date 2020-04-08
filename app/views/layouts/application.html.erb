@@ -14,40 +14,46 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="952635847674-ocr6762iqhjkvtb988fclnfs4trr6qqr.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
 
   <body>
-    <%= yield %>
 
-    <div id="signin" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <div class="container">
 
-    <a href="#" onclick="signOut();">Sign out</a>
-    <script>
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-            });
-        }
-    </script>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <h3>Pocket Timeline</h3>
+          </a>
 
-    <script>
-        function onSignIn(googleUser) {
-            // Useful data for your client-side scripts:
-            var profile = googleUser.getBasicProfile();
-            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-            console.log('Full Name: ' + profile.getName());
-            console.log('Given Name: ' + profile.getGivenName());
-            console.log('Family Name: ' + profile.getFamilyName());
-            console.log("Image URL: " + profile.getImageUrl());
-            console.log("Email: " + profile.getEmail());
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="auth-menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
 
-            $('#signin').text('Sign in: ' + profile.getName());
+        <div class="navbar-menu" id="auth-menu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <% if signed_in? %>
+                  <span class="button">Signed in as <%= current_user.name %></span>
+                  <%= link_to 'Sign out', '/auth/signout', class: 'button is-light' %>
+                <% else %>
+                  <%= link_to 'Sign in', '/auth/google_oauth2', class: "button is-primary" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-            // The ID token you need to pass to your backend:
-            var id_token = googleUser.getAuthResponse().id_token;
-            console.log("ID Token: " + id_token);
-        }
-    </script>
+      <%= yield %>
+    </div>
   </body>
 </html>
