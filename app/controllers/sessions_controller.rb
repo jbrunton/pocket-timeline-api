@@ -10,6 +10,11 @@ class SessionsController < ApplicationController
     # Log the authorizing user in.
     self.current_user = @auth.user
 
-    render plain: "Welcome, #{current_user.name}."
+    redirect_to '/home/index'
+  end
+
+  def destroy
+    self.current_user = nil
+    redirect_to '/home/index', notice: "Signed out!"
   end
 end
