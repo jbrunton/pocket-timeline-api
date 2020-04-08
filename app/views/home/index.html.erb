@@ -1,12 +1,6 @@
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
 
-<% if signed_in? %>
-  Signed in as <%= current_user.name %>. <%= link_to 'Sign out', '/auth/signout' %>
-<% else %>
-  <%= link_to 'Sign in', '/auth/google_oauth2' %>
-<% end %>
-
 <section class="section">
   <div class="container">
     <h1 class="title">

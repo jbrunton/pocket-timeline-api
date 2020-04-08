@@ -4,8 +4,7 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-// see https://jbrunton.atlassian.net/browse/LRN-6
-// require("turbolinks").start()
+require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
