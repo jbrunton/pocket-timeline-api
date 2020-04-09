@@ -9,8 +9,13 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     if current_user.nil?
-      session['auth.origin'] = request.fullpath
-      redirect_to '/auth/google_oauth2'
+      respond_to do |format|
+        format.html do
+          session['auth.origin'] = request.fullpath
+          redirect_to '/auth/google_oauth2'
+        end
+        format.json { head :unauthorized }
+      end
     end
   end
 
