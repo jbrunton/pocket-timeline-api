@@ -41,7 +41,7 @@
             <div class="navbar-item">
               <div class="buttons">
                 <% if signed_in? %>
-                  <span class="button">Signed in as <%= current_user.name %></span>
+                  <%= link_to "Signed in as #{current_user.name}", '/user/profile', class: 'button' %>
                   <%= link_to 'Sign out', '/auth/signout', class: 'button is-light' %>
                 <% else %>
                   <%= link_to 'Sign in', '/auth/google_oauth2', class: "button is-primary", data: { turbolinks: false } %>
