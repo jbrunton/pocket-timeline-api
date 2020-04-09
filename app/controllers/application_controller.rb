@@ -7,7 +7,19 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
-  helper_method :current_user, :signed_in?
+  def authenticate_user!
+    if current_user.nil?
+      respond_to do |format|
+        format.html do
+          session['auth.origin'] = request.fullpath
+          redirect_to '/auth/google_oauth2'
+        end
+        format.json { head :unauthorized }
+      end
+    end
+  end
+
+  helper_method :current_user, :signed_in?, :authenticate_user!
 
   def current_user=(user)
     @current_user = user

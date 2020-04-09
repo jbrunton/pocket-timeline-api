@@ -36,8 +36,16 @@ class SessionsController < ApplicationController
     self.current_user = @auth.user
 
     respond_to do |format|
-      format.html { redirect_to '/home/index' }
+      format.html { redirect_to pop_auth_origin || '/home/index' }
       format.json { render json: { success: true } }
     end
+  end
+
+  private
+
+  def pop_auth_origin
+    auth_origin = session['auth.origin']
+    session['auth.origin'] = nil
+    auth_origin
   end
 end

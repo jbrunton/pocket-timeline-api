@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   post '/auth/google_oauth2/signin', :to => 'sessions#signin'
 
   get '/auth/signout', :to => 'sessions#destroy'
+
+  get '/user/profile'
 end
