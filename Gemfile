@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+gem 'google-id-token'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
