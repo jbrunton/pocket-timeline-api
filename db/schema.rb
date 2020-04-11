@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_08_111850) do
+ActiveRecord::Schema.define(version: 2020_04_11_174416) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string "provider"
@@ -21,6 +21,23 @@ ActiveRecord::Schema.define(version: 2020_04_08_111850) do
     t.index ["user_id"], name: "index_authorizations_on_user_id"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.date "date"
+    t.integer "timeline_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["timeline_id"], name: "index_events_on_timeline_id"
+  end
+
+  create_table "timelines", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -29,4 +46,5 @@ ActiveRecord::Schema.define(version: 2020_04_08_111850) do
   end
 
   add_foreign_key "authorizations", "users"
+  add_foreign_key "events", "timelines"
 end
