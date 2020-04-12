@@ -21,7 +21,10 @@ class SessionsController < ApplicationController
     jwt = validator.check(params['id_token'], ENV['GOOGLE_CLIENT_ID'])
     {
         'uid' => jwt['sub'],
-        'provider' => 'google_oauth2'
+        'provider' => 'google_oauth2',
+        'info' => {
+            'name' => jwt['name']
+        }
     }
   end
 
