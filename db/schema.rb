@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_04_14_104631) do
     t.integer "timeline_id", null: false
     t.integer "user_id", null: false
     t.float "normalized_score"
+    t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["timeline_id"], name: "index_ratings_on_timeline_id"
