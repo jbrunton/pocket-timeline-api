@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post 'rating/score'
+  get 'rating/ratings'
+
   get 'timelines', to: 'timeline#index'
   get 'timelines/:id', to: 'timeline#show'
 
