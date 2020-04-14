@@ -4,7 +4,8 @@ class Rating < ApplicationRecord
   belongs_to :timeline
   belongs_to :user
 
-  scope :active, -> { where(active: true).order(created_at: :desc) }
+  default_scope { order(created_at: :desc) }
+  scope :active, -> { where(active: true) }
 
   def self.aggregate(user)
     user.ratings

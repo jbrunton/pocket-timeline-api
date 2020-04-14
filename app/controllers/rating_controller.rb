@@ -12,8 +12,4 @@ class RatingController < ApplicationController
       render status: :unprocessable_entity, json: { errors: rating.errors }
     end
   end
-
-  def index
-    render json: Rating.aggregate(current_user)
-  end
 end
