@@ -33,10 +33,12 @@ ActiveRecord::Schema.define(version: 2020_04_14_104631) do
 
   create_table "ratings", force: :cascade do |t|
     t.integer "timeline_id", null: false
+    t.integer "user_id", null: false
     t.float "normalized_score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["timeline_id"], name: "index_ratings_on_timeline_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "timelines", force: :cascade do |t|
@@ -56,4 +58,5 @@ ActiveRecord::Schema.define(version: 2020_04_14_104631) do
   add_foreign_key "authorizations", "users"
   add_foreign_key "events", "timelines"
   add_foreign_key "ratings", "timelines"
+  add_foreign_key "ratings", "users"
 end
