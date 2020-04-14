@@ -12,7 +12,6 @@ class Rating < ApplicationRecord
         .active
         .group(:timeline_id)
         .average(:normalized_score)
-        .map { |id, score| { timeline_id: id, normalized_score: score.to_f } }
   end
 
   after_create :deactivate_old_entries
@@ -20,7 +19,7 @@ class Rating < ApplicationRecord
   private
 
   def deactivate_old_entries
-    ratings = user.ratings.active.drop(5)
+    ratings = user.ratings.active.where(timeline: timeline).drop(5)
     ratings.each do |rating|
       rating.active = false
       rating.save

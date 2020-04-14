@@ -15,7 +15,6 @@ class TimelineController < ApplicationController
 
   def normalized_score_for(timeline)
     return nil if @ratings.nil?
-    rating = @ratings[timeline.id] || {}
-    rating[:normalized_score]
+    @ratings[timeline.id].try(:to_f)
   end
 end
