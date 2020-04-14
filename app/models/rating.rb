@@ -11,7 +11,7 @@ class Rating < ApplicationRecord
         .active
         .group(:timeline_id)
         .average(:normalized_score)
-        .map { |id, score| { timeline_id: id, score: score.to_f } }
+        .map { |id, score| { timeline_id: id, normalized_score: score.to_f } }
   end
 
   after_create :deactivate_old_entries
