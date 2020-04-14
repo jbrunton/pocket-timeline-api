@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  protect_from_forgery unless: -> { request.format.json? }
-
   def create
     authorize(request.env['omniauth.auth'])
   end

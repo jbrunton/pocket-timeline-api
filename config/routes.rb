@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  post 'rating/score'
-  get 'rating/ratings'
+  post 'ratings/score', to: 'rating#score'
+  get 'ratings', to: 'rating#index'
 
   get 'timelines', to: 'timeline#index'
   get 'timelines/:id', to: 'timeline#show'

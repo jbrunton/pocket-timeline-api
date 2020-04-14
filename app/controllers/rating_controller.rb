@@ -1,8 +1,19 @@
 class RatingController < ApplicationController
-  def score
+  before_action :authenticate_user!
 
+  def score
+    rating = current_user.ratings.build(
+        normalized_score: params[:normalized_score],
+        timeline_id: params[:timeline_id]
+    )
+    if rating.save
+      render json: rating
+    else
+      render status: :unprocessable_entity, json: { errors: rating.errors }
+    end
   end
 
-  def ratings
+  def index
+    render json: Rating.aggregate(current_user)
   end
 end
