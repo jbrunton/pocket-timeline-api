@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_104631) do
+ActiveRecord::Schema.define(version: 2020_04_15_193602) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string "provider"
@@ -19,6 +19,22 @@ ActiveRecord::Schema.define(version: 2020_04_14_104631) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_authorizations_on_user_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.integer "timeline_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["timeline_id", "name"], name: "index_categories_on_timeline_id_and_name", unique: true
+    t.index ["timeline_id"], name: "index_categories_on_timeline_id"
+  end
+
+  create_table "categories_events", id: false, force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "category_id", null: false
+    t.index ["category_id"], name: "index_categories_events_on_category_id"
+    t.index ["event_id"], name: "index_categories_events_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -58,6 +74,7 @@ ActiveRecord::Schema.define(version: 2020_04_14_104631) do
   end
 
   add_foreign_key "authorizations", "users"
+  add_foreign_key "categories", "timelines"
   add_foreign_key "events", "timelines"
   add_foreign_key "ratings", "timelines"
   add_foreign_key "ratings", "users"
