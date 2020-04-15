@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2020_04_15_193602) do
   create_table "categories_events", id: false, force: :cascade do |t|
     t.integer "event_id", null: false
     t.integer "category_id", null: false
+    t.index ["category_id"], name: "index_categories_events_on_category_id"
+    t.index ["event_id"], name: "index_categories_events_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
