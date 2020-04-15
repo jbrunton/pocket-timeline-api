@@ -48,14 +48,14 @@ ActiveRecord::Schema.define(version: 2020_04_15_193602) do
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.integer "timeline_id", null: false
+    t.integer "category_id", null: false
     t.integer "user_id", null: false
     t.integer "level", null: false
     t.float "normalized_score"
     t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["timeline_id"], name: "index_ratings_on_timeline_id"
+    t.index ["category_id"], name: "index_ratings_on_category_id"
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
@@ -76,6 +76,6 @@ ActiveRecord::Schema.define(version: 2020_04_15_193602) do
   add_foreign_key "authorizations", "users"
   add_foreign_key "categories", "timelines"
   add_foreign_key "events", "timelines"
-  add_foreign_key "ratings", "timelines"
+  add_foreign_key "ratings", "categories"
   add_foreign_key "ratings", "users"
 end

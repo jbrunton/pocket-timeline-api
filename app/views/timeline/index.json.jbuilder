@@ -1,5 +1,8 @@
 json.array! @timelines do |timeline|
   json.merge! timeline.attributes
-  json.merge!(ratings: ratings_for(timeline))
-  json.merge!(categories: timeline.categories)
+
+  json.categories timeline.categories do |category|
+    json.merge! category.attributes
+    json.merge!(ratings: ratings_for(category))
+  end
 end

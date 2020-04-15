@@ -13,8 +13,8 @@ class TimelineController < ApplicationController
 
   private
 
-  def ratings_for(timeline)
+  def ratings_for(category)
     return nil if @ratings.nil?
-    @ratings[timeline.id]
+    @ratings[category.id]
   end
 end
