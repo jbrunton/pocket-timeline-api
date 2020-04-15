@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_04_14_104631) do
   create_table "ratings", force: :cascade do |t|
     t.integer "timeline_id", null: false
     t.integer "user_id", null: false
+    t.integer "level", null: false
     t.float "normalized_score"
     t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
