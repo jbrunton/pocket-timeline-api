@@ -9,7 +9,7 @@ class Rating < ApplicationRecord
 
   def self.aggregate(user)
     Timeline.all.map do |timeline|
-      [1, 2, 3].map do |level|
+      timeline_ratings = [1, 2, 3].map do |level|
         normalized_score = user.ratings.active
             .where(timeline: timeline, level: level)
             .average(:normalized_score)
@@ -21,13 +21,13 @@ class Rating < ApplicationRecord
           !max_level.nil? && level <= max_level + 1 # i.e. if the max completed level is 1, then 2 is unlocked
         end
         {
-            timeline_id: timeline.id,
             level: level,
             normalized_score: normalized_score,
             unlocked: unlocked
         }
       end
-    end
+      [timeline.id, timeline_ratings]
+    end.to_h
   end
 
   after_create :deactivate_old_entries

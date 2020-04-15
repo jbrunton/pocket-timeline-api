@@ -9,12 +9,12 @@ class TimelineController < ApplicationController
     render json: timeline.to_json(include: :events)
   end
 
-  helper_method :normalized_score_for
+  helper_method :ratings_for
 
   private
 
-  def normalized_score_for(timeline)
+  def ratings_for(timeline)
     return nil if @ratings.nil?
-    @ratings[timeline.id].try(:to_f)
+    @ratings[timeline.id]
   end
 end
