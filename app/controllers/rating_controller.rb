@@ -4,7 +4,8 @@ class RatingController < ApplicationController
   def score
     rating = current_user.ratings.build(
         normalized_score: params[:normalized_score],
-        timeline_id: params[:timeline_id]
+        timeline_id: params[:timeline_id],
+        level: params[:level]
     )
     if rating.save
       render json: rating
