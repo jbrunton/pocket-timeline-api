@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_193045) do
+ActiveRecord::Schema.define(version: 2020_04_15_193602) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string "provider"
@@ -27,6 +27,11 @@ ActiveRecord::Schema.define(version: 2020_04_15_193045) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["timeline_id"], name: "index_categories_on_timeline_id"
+  end
+
+  create_table "categories_events", id: false, force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "category_id", null: false
   end
 
   create_table "events", force: :cascade do |t|
