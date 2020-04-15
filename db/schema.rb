@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_193602) do
     t.integer "timeline_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["timeline_id", "name"], name: "index_categories_on_timeline_id_and_name", unique: true
     t.index ["timeline_id"], name: "index_categories_on_timeline_id"
   end
 
