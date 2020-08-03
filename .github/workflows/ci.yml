@@ -13,13 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby 2.6
+    - name: Set up Ruby 2.7
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.6.x
+        ruby-version: 2.7.x
     - name: Install dependencies
       run: sudo apt-get install libsqlite3-dev
-    - name: Build and test with Rake
+    - name: Build and test
       run: |
         gem install bundler
         bundle install --jobs 4 --retry 3
