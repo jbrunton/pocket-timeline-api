@@ -16,7 +16,11 @@ class SessionsController < ApplicationController
 
   def validate_id_token
     validator = GoogleIDToken::Validator.new
-    jwt = validator.check(params['id_token'], ENV['GOOGLE_CLIENT_ID'])
+    client_id = ENV['GOOGLE_CLIENT_ID']
+    if client_id.nil?
+      raise RuntimeError, "GOOGLE_CLIENT_ID required"
+    end
+    jwt = validator.check(params['id_token'], client_id)
     {
         'uid' => jwt['sub'],
         'provider' => 'google_oauth2',
