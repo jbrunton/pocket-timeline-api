@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     validator = GoogleIDToken::Validator.new
     client_id = ENV['GOOGLE_CLIENT_ID']
     if client_id.nil?
-      raise "GOOGLE_CLIENT_ID required"
+      raise RuntimeError, "GOOGLE_CLIENT_ID required"
     end
     jwt = validator.check(params['id_token'], client_id)
     {
